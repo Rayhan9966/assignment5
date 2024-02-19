@@ -12,22 +12,48 @@ function selectTicket(){
   ticketPriceElement.innerText=550;
 
 }
-let ticketPriceElement=document.getElementById("ticket-price");
+const allSeatButton = document.getElementsByID("selectTicket()");
+let seatCount = 0;
+let seatCountDecrease = 28;
 
 
-function selectTicket(){
-
-  ticketPriceElement.innerText=550;
-
+function setInnerText(id, value) {
+  document.getElementById(id).innerText = value;
 }
-let ticketPriceElement=document.getElementById("ticket-price");
 
 
-function selectTicket(){
+//  // Function to display the popup
+//  function showPopup() {
+//   var popup = document.getElementById('popup');
+//   var overlay = document.getElementById('overlay');
+//   popup.style.display = 'block';
+//   overlay.style.display = 'block';
 
-  ticketPriceElement.innerText=550;
+//   // Close the popup after 3 seconds (you can adjust this as needed)
+//   setTimeout(function() {
+//       popup.style.display = 'none';
+//       overlay.style.display = 'none';
+//  // Redirect to the next page after payment success
+//  window.location.href = 'next-page.html'; // Replace 'next-page.html' with the URL of your next page
+// }, 3000);
+// }
 
-}
+// let ticketPriceElement=document.getElementById("ticket-price");
+
+
+// function selectTicket(){
+
+//   ticketPriceElement.innerText=550;
+
+// }
+// let ticketPriceElement=document.getElementById("ticket-price");
+
+
+// function selectTicket(){
+
+//   ticketPriceElement.innerText=550;
+
+// }
 
 
 
