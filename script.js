@@ -1,69 +1,88 @@
-const bookedSeats = [ ];
-const totalSeat=8;
-const totalSeatElement=document.getElementById("seat-count");
-totalSeatElement.innerText=totalSeat;
-
-
-let ticketPriceElement=document.getElementById("ticket-price");
-
-
-function selectTicket(){
-
-  ticketPriceElement.innerText=550;
-
+// Function to update the disabled state of a button based on a condition
+function updateButtonState(element, condition) {
+  const button = document.getElementById(element);
+  button.disabled = !condition;
 }
-const allSeatButton = document.getElementsByID("selectTicket()");
-let seatCount = 0;
-let seatCountDecrease = 28;
 
-
-function setInnerText(id, value) {
+// Function to update the inner text of an element with the provided value
+function updateInnerText(id, value) {
   document.getElementById(id).innerText = value;
 }
 
+// Event listener for the "phone-number" input to update the next button state
+document.getElementById("phone-number").addEventListener("keyup", function (event) {
+  updateButtonState("btn-next", event.target.value !== "");
+});
 
-//  // Function to display the popup
-//  function showPopup() {
-//   var popup = document.getElementById('popup');
-//   var overlay = document.getElementById('overlay');
-//   popup.style.display = 'block';
-//   overlay.style.display = 'block';
+// Event listeners for each seat button to handle seat selection and update total price
+const allSeatButtons = document.getElementsByClassName("btn-seat-select");
+let seatCount = 0;
+let seatCountDecrease = 28;
 
-//   // Close the popup after 3 seconds (you can adjust this as needed)
-//   setTimeout(function() {
-//       popup.style.display = 'none';
-//       overlay.style.display = 'none';
-//  // Redirect to the next page after payment success
-//  window.location.href = 'next-page.html'; // Replace 'next-page.html' with the URL of your next page
-// }, 3000);
-// }
+for (const button of allSeatButtons) {
+  button.addEventListener("click", function (event) {
+    // Show alert if the maximum seat count is reached
+    const alert = document.getElementById("alert");
+    if (seatCount >= 4) {
+      alert.classList.remove("hidden");
+      return;
+    }
 
-// let ticketPriceElement=document.getElementById("ticket-price");
+    // Update seat count and decrease count
+    const seatNum = event.target.innerText;
+    seatCount++;
+    seatCountDecrease--;
+    updateInnerText("seat-num", seatCount);
+    updateInnerText("seat-num-decrease", seatCountDecrease);
 
+    // Create and append selected seat details
+    const selectedSeatContainer = document.getElementById("selected-seat-container");
+    const div = document.createElement("div");
+    div.classList.add(
+      "flex",
+      "justify-between",
+      "border-b-2",
+      "border-[#03071233]",
+      "py-4",
+      "font-normal",
+      "text-[#03071299]",
+      "text-base"
+    );
 
-// function selectTicket(){
+    const p = document.createElement("p");
+    p.innerText = seatNum;
+    div.appendChild(p);
 
-//   ticketPriceElement.innerText=550;
+    const p2 = document.createElement("p");
+    p2.innerText = "Economy";
+    div.appendChild(p2);
 
-// }
-// let ticketPriceElement=document.getElementById("ticket-price");
+    const p3 = document.createElement("p");
+    p3.innerText = "550";
+    div.appendChild(p3);
 
+    selectedSeatContainer.appendChild(div);
 
-// function selectTicket(){
+    // Update total price and grand total
+    const totalPrice = parseInt(document.getElementById("total-price").innerText);
+    const newTotalPrice = totalPrice + 550;
+    updateInnerText("total-price", newTotalPrice);
 
-//   ticketPriceElement.innerText=550;
+    const finalPrice = calculateGrandTotal(
+      newTotalPrice,
+      document.getElementById("coupon-input").value.toLowerCase()
+    );
+    updateInnerText("grand-total-price", finalPrice);
 
-// }
+    // Apply discount when the apply button is clicked
+    document.getElementById("btn-apply").addEventListener("click", function () {
+      updateInnerText("grand-total-price", calculateGrandTotal(newTotalPrice, "new15"));
+      document.getElementById("coupon-section").classList.add("hidden");
+    });
 
-
-
-
-function button(){
-    const homePage=document.getElementById('hPage');
-    homePage.classList.add('hidden');
-    
-
-    const phPage=document.getElementById('ph-paribahon');
-    phPage.classList.remove('hidden');
-
+    // Disable the selected seat button and style it
+    event.target.style.background = "#1DD100";
+    event.target.style.color = "white";
+    event.target.disabled = true;
+  });
 }
