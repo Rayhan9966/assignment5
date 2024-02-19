@@ -1,3 +1,27 @@
+// Function to calculate the grand total considering the discount percentage
+function calculateGrandTotal(totalPrice, discount) {
+  // Determine the discount percentage based on the provided discount code
+  const discountPercentage =
+    discount === "new15"
+      ? 0.15
+      : discount === "couple20"
+      ? 0.2
+      : discount === "programmer"
+      ? 0.3
+      : 0;
+
+  // Calculate the total discount amount
+  const totalDiscount = totalPrice * discountPercentage;
+
+  // Calculate the grand total after applying the discount
+  const grandTotal = totalPrice - totalDiscount;
+
+  // Update the inner text to display the discount percentage in red color
+  updateInnerText("discount-percentage", `-${(discountPercentage * 100).toFixed(0)}%`);
+
+  return grandTotal;
+}
+
 // Function to update the disabled state of a button based on a condition
 function updateButtonState(element, condition) {
   const button = document.getElementById(element);
@@ -14,10 +38,19 @@ document.getElementById("phone-number").addEventListener("keyup", function (even
   updateButtonState("btn-next", event.target.value !== "");
 });
 
+// Event listener for the "coupon-input" to validate and update the apply button state
+document.getElementById("coupon-input").addEventListener("keyup", function (event) {
+  const isValidCoupon =
+    event.target.value.toLowerCase() === "new15" ||
+    event.target.value.toLowerCase() === "couple20" ||
+    event.target.value.toLowerCase() === "programmer";
+  updateButtonState("btn-apply", isValidCoupon);
+});
+
 // Event listeners for each seat button to handle seat selection and update total price
 const allSeatButtons = document.getElementsByClassName("btn-seat-select");
 let seatCount = 0;
-let seatCountDecrease = 28;
+let seatCountDecrease = 40;
 
 for (const button of allSeatButtons) {
   button.addEventListener("click", function (event) {
@@ -66,7 +99,6 @@ for (const button of allSeatButtons) {
     // Update total price and grand total
     const totalPrice = parseInt(document.getElementById("total-price").innerText);
     const newTotalPrice = totalPrice + 550;
-    updateInnerText("total-price", newTotalPrice);
 
     const finalPrice = calculateGrandTotal(
       newTotalPrice,
