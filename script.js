@@ -2,9 +2,9 @@
 function calculateGrandTotal(totalPrice, discount) {
   // Determine the discount percentage based on the provided discount code
   const discountPercentage =
-    discount === "new15"
+    discount === "NEW15"
       ? 0.15
-      : discount === "couple20"
+      : discount === "Couple20"
       ? 0.2
       : discount === "programmer"
       ? 0.3
@@ -50,7 +50,7 @@ document.getElementById("coupon-input").addEventListener("keyup", function (even
 // Event listeners for each seat button to handle seat selection and update total price
 const allSeatButtons = document.getElementsByClassName("btn-seat-select");
 let seatCount = 0;
-let seatCountDecrease = 28;
+let seatCountDecrease = 24;
 
 for (const button of allSeatButtons) {
   button.addEventListener("click", function (event) {

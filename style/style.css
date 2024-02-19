@@ -1,0 +1,14 @@
+html{
+    scroll-behavior: smooth;
+}
+.font-inter{
+    font-family: "Inter", sans-serif;
+}
+
+.font-raleway{
+    font-family: "Raleway", sans-serif;
+}
+
+.font-roboto{
+    font-family: "Roboto", sans-serif;
+}
