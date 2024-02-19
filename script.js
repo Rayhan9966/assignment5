@@ -50,7 +50,7 @@ document.getElementById("coupon-input").addEventListener("keyup", function (even
 // Event listeners for each seat button to handle seat selection and update total price
 const allSeatButtons = document.getElementsByClassName("btn-seat-select");
 let seatCount = 0;
-let seatCountDecrease = 40;
+let seatCountDecrease = 28;
 
 for (const button of allSeatButtons) {
   button.addEventListener("click", function (event) {
@@ -99,6 +99,7 @@ for (const button of allSeatButtons) {
     // Update total price and grand total
     const totalPrice = parseInt(document.getElementById("total-price").innerText);
     const newTotalPrice = totalPrice + 550;
+    updateInnerText("total-price", newTotalPrice);
 
     const finalPrice = calculateGrandTotal(
       newTotalPrice,
